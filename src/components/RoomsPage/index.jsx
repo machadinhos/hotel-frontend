@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css';
 
 
 function RoomsPage() {
@@ -15,20 +17,35 @@ function RoomsPage() {
         if (rooms.length === 0) {
             return (<h2>There are no rooms</h2>);
         }
-        return (<ul>
+        return (<>
             {rooms.map((room) => {
-                return (<li key={room.id}>
-                    <h2>{room.id}</h2>
-                </li>);
+                return (<tr key={room.id}>
+                    <td>{room.id}</td>
+                    <td>{room.roomNumber}</td>
+                    <td>{room.price}</td>
+                    <td>{room.roomType}</td>
+                    <td>{room.available + ''}</td>
+                </tr>);
             })}
-        </ul>);
+        </>);
 
     }
 
     return (<div>
-        <ul>
+        <table className="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Room Number</th>
+                <th>Price</th>
+                <th>Room type</th>
+                <th>Available</th>
+            </tr>
+            </thead>
+            <tbody>
             {renderRooms()}
-        </ul>
+            </tbody>
+        </table>
     </div>);
 }
 

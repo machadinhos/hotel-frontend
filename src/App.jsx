@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import NaveBar from './components/NaveBar/index.jsx';
 import GuestsPage from './components/GuestsPage/index.jsx';
 import RoomsPage from './components/RoomsPage/index.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

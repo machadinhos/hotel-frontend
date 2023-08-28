@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css';
 
 
 function GuestsPage() {
@@ -15,19 +17,34 @@ function GuestsPage() {
         if (guests.length === 0) {
             return (<h2>There are no guests</h2>);
         }
-        return (<ul>
+        return (<>
             {guests.map((guest) => {
-                return (<li key={guest.id}>
-                    <h2>{guest.firstName}</h2>
-                </li>);
+                return (<tr key={guest.id}>
+                    <td>{guest.id}</td>
+                    <td>{guest.firstName}</td>
+                    <td>{guest.lastName}</td>
+                    <td>{guest.email}</td>
+                    <td>{guest.phoneNumber}</td>
+                </tr>);
             })}
-        </ul>);
+        </>);
     }
 
     return (<div className="guests-page">
-        <ul>
+        <table className="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+            </tr>
+            </thead>
+            <tbody>
             {renderGuests()}
-        </ul>
+            </tbody>
+        </table>
     </div>);
 }
 
