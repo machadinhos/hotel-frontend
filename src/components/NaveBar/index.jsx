@@ -1,6 +1,8 @@
 import './style.css';
 
-const NaveBar = () => {
+
+function NaveBar() {
+
     const handleClick = (url) => {
         return function handleRedirect() {
             window.location.href = url;
@@ -12,6 +14,6 @@ const NaveBar = () => {
         <button onClick={handleClick('/guests')} className="nave-bar__button">Guests</button>
         <button onClick={handleClick('/rooms')} className="nave-bar__button">Rooms</button>
     </div>);
-};
+}
 
 export default NaveBar;
