@@ -1,0 +1,30 @@
+.nave-bar {
+    background-color: #333;
+    overflow: hidden;
+    width: 100%;
+}
+
+.nave-bar__button {
+    margin: 10px;
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: #999; /* Grayish background color */
+    color: #fff;
+    border: 2px solid #777; /* Grayish border color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.nave-bar__button:hover {
+    background-color: #777; /* Darker grayish background color on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nave-bar__button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
