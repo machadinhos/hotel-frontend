@@ -6,3 +6,10 @@
     padding: 10px;
     margin: 10px;
 }
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+}
