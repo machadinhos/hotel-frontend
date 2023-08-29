@@ -3,8 +3,7 @@ import {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
-
-function GuestsPage() {
+const GuestsPage = (props) => {
     const [guests, setGuests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -21,7 +20,7 @@ function GuestsPage() {
                 });
     }, []);
 
-    function renderGuests() {
+    const renderGuests = () => {
         if (loading) {
             return <h2>Loading...</h2>;
         } else if (error) {
@@ -41,6 +40,11 @@ function GuestsPage() {
                 </tbody>);
     }
 
+    const handleAddGuestClick = () => {
+        props.setGuest({firstName: 'Pedro'});
+        window.location.href = '/guestform';
+    };
+
     return (<div className="guests-page">
                 <table className="table table-striped">
                     <thead>
@@ -54,6 +58,7 @@ function GuestsPage() {
                     </thead>
                     {renderGuests()}
                 </table>
+        <button type="button" className="btn btn-primary" onClick={handleAddGuestClick}>+ Add Guest</button>
             </div>);
 }
 

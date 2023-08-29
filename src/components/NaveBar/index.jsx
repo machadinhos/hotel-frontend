@@ -1,7 +1,6 @@
 import './style.css';
 
-
-function NaveBar() {
+const NaveBar = () => {
 
     const handleClick = (url) => {
         return function handleRedirect() {

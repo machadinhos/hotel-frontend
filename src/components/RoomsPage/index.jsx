@@ -3,8 +3,7 @@ import {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
-
-function RoomsPage() {
+const RoomsPage = () => {
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
