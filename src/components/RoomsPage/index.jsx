@@ -15,7 +15,7 @@ function RoomsPage() {
                     setRooms(response.data);
                     setLoading(false);
                 })
-                .catch(error => {
+            .catch(() => {
                     setError('An error occurred while fetching rooms');
                     setLoading(false);
                 });
