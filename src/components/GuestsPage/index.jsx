@@ -15,7 +15,7 @@ function GuestsPage() {
                     setGuests(response.data);
                     setLoading(false);
                 })
-                .catch(error => {
+            .catch(() => {
                     setError('An error occurred while fetching guests');
                     setLoading(false);
                 });
