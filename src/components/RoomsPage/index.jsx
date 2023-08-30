@@ -21,15 +21,11 @@ const RoomsPage = () => {
     }, []);
 
     function renderRooms() {
-        if (loading) {
-            return <h2>Loading...</h2>;
-        } else if (error) {
-            return <h2>{error}</h2>;
-        } else if (rooms.length === 0) {
-            return <h2>There are no rooms</h2>;
+        if (loading || error || rooms.length === 0) {
+            return;
         }
 
-        return (<tbody>
+        return (<>
                 {rooms.map(room => (<tr key={room.id}>
                             <td>{room.id}</td>
                             <td>{room.roomNumber}</td>
@@ -37,10 +33,19 @@ const RoomsPage = () => {
                             <td>{room.roomType}</td>
                             <td>{room.available + ''}</td>
                         </tr>))}
-                </tbody>);
+        </>);
     }
 
+    const handleAddRoomClick = () => {
+        props.setRoom();
+        window.location.href = '/guestform';
+    };
+
+    const addButton = <button type="button" className="btn btn-primary" onClick={handleAddRoomClick}>+ Add
+        Room</button>;
+
     return (<div>
+        <h2>Rooms</h2>
                 <table className="table table-striped">
                     <thead>
                     <tr>
@@ -51,8 +56,12 @@ const RoomsPage = () => {
                         <th>Available</th>
                     </tr>
                     </thead>
+                    <tbody>
                     {renderRooms()}
+                    </tbody>
                 </table>
+        {loading ? <h2>Loading...</h2> : error ? <h2>{error}</h2> : rooms.length === 0 ? <><h2>There are no
+            rooms</h2>{addButton}</> : addButton}
             </div>);
 }
 
