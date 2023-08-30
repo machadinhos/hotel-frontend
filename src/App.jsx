@@ -4,6 +4,7 @@ import NaveBar from './components/NaveBar/index.jsx';
 import GuestsPage from './components/GuestsPage/index.jsx';
 import RoomsPage from './components/RoomsPage/index.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import GuestForm from './components/GuestForm/index.jsx';
 import {useState} from 'react';
 
 const App = () => {
@@ -19,6 +20,9 @@ const App = () => {
             <div className="mainContainer">
             <Routes>
                 <Route path="/" element={<h1>Home</h1>}/>
+                <Route path="/guestform"
+                       element={<GuestForm url={url} httpRequestType={httpRequestType} guestFormTitle={guestFormTitle}
+                                           setGuest={setGuest} guest={guest}/>}/>
                 <Route path="/guests" element={<GuestsPage setUrl={setUrl} setHttpRequestType={setHttpRequestType}
                                                            setGuestFormTitle={setGuestFormTitle}
                                                            setGuest={setGuest}/>}/>

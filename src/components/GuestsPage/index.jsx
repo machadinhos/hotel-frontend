@@ -44,8 +44,8 @@ const GuestsPage = (props) => {
         return () => {
             axios.delete('http://localhost:8080/hotel/api/guest/' + guest.id)
                     .then(() => window.location.reload());
-        };
-    };
+        }
+    }
 
     const renderGuests = () => {
         if (loading || error || guests.length === 0) {
