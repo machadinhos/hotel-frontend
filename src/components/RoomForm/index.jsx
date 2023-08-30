@@ -1,10 +1,33 @@
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import {useEffect, useState} from 'react';
+import './style.css';
 
 const RoomForm = (props) => {
     const navigate = useNavigate();
+    const [isAvailable, setAvailable] = useState(true);
+    const [guests, setGuests] = useState([]);
 
     const room = props.room;
+
+    if (room.available === undefined) {
+        room.available = true;
+    }
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/hotel/api/guests')
+                .then(response => setGuests(response.data));
+    }, []);
+
+    const renderGuestsSelect = () => {
+        if (guests.length === 0 || isAvailable) {
+            return;
+        }
+
+        return (<select id="guestSelect" className="form-select" aria-label="Guest">
+            {guests.map(guest => (<option key={guest.id} value={guest.id}>{guest.firstName} {guest.lastName}</option>))}
+        </select>);
+    };
 
     const handleSubmitClick = (event) => {
         event.preventDefault();
@@ -15,15 +38,12 @@ const RoomForm = (props) => {
         const roomNumber = button.form[1].value;
         const price = button.form[2].value;
         const roomType = button.form[3].value;
-        const available = button.form[4].value;
 
         const room = {
-            id: id, roomNumber: roomNumber, price: price, roomType: roomType, available: available
+            id: id, roomNumber: roomNumber, price: price, roomType: roomType, available: isAvailable
         };
 
         props.setRoom(room);
-
-        console.log(room);
 
         axios[props.roomHttpRequestType](props.roomUrl, room)
                 .then(() => navigate('/rooms'))
@@ -52,10 +72,24 @@ const RoomForm = (props) => {
             </div>
             <div className="col-md-6">
                 <label className="form-label">Available</label>
-                <select className="form-select" aria-label="Available">
-                    <option value="true">True</option>
-                    <option value="false">False</option>
-                </select>
+                <div className="form-check">
+                    <input onClick={() => setAvailable(true)} className="form-check-input" type="radio" name="available"
+                           id="true"
+                           defaultChecked={room.available}/>
+                    <label className="form-check-label" htmlFor="true">
+                        true
+                    </label>
+                </div>
+                <div className="form-check">
+                    <input onClick={() => setAvailable(false)} className="form-check-input" type="radio"
+                           name="available" id="false" defaultChecked={!room.available}/>
+                    <div id="guestsSelectDiv">
+                        <label className="form-check-label" htmlFor="false">
+                            false
+                        </label>
+                        {renderGuestsSelect()}
+                    </div>
+                </div>
             </div>
             <div className="col-12">
                 <button onClick={handleSubmitClick} type="submit" className="btn btn-primary" id="submitButton">Submit
@@ -63,7 +97,6 @@ const RoomForm = (props) => {
             </div>
         </form>
     </>);
-
 };
 
 export default RoomForm;

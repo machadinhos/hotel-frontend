@@ -1,0 +1,8 @@
+#guestsSelectDiv {
+    display: flex;
+}
+
+#guestSelect {
+    position: fixed;
+    margin-left: 60px;
+}
