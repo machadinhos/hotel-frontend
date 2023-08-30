@@ -25,7 +25,7 @@ const GuestForm = (props) => {
 
         props.setGuest(guest);
 
-        axios[props.httpRequestType](props.url, guest)
+        axios[props.guestHttpRequestType](props.guestUrl, guest)
                 .then(() => navigate('/guests'))
                 .catch(() => navigate('/guests'));
     };
@@ -33,7 +33,7 @@ const GuestForm = (props) => {
     return (<>
         <h2>{props.guestFormTitle}</h2>
         <form className="col">
-            <input type="hidden" value={props.id} id="id"/>
+            <input type="hidden" value={guest.id} id="id"/>
             <div className="col-md-6">
                 <label className="form-label">First Name</label>
                 <input type="text" className="form-control" defaultValue={guest.firstName} id="firstName"/>

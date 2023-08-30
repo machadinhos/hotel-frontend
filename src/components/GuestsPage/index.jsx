@@ -23,18 +23,18 @@ const GuestsPage = (props) => {
     }, []);
 
     const handleAddGuestClick = () => {
-        props.setHttpRequestType('post');
+        props.setGuestHttpRequestType('post');
         props.setGuest({});
-        props.setUrl('http://localhost:8080/hotel/api/guest');
+        props.setGuestUrl('http://localhost:8080/hotel/api/guest');
         props.setGuestFormTitle('Add Guest');
         navigate('/guestform');
     };
 
     const handleEditGuestClick = (guest) => {
         return () => {
-            props.setHttpRequestType('put');
+            props.setGuestHttpRequestType('put');
             props.setGuest(guest);
-            props.setUrl('http://localhost:8080/hotel/api/guest/' + guest.id);
+            props.setGuestUrl('http://localhost:8080/hotel/api/guest/' + guest.id);
             props.setGuestFormTitle('Edit Guest ' + guest.id);
             navigate('/guestform');
         };
