@@ -51,6 +51,7 @@ const RoomsPage = (props) => {
                             <td>{room.price}</td>
                             <td>{room.roomType}</td>
                             <td>{room.available + ''}</td>
+                    <td>{room.guestId ? room.guestId : 'null'}</td>
                     <td>
                         <button onClick={handleEditRoomClick(room)} type="button" className="btn btn-success">Edit
                         </button>
@@ -85,6 +86,7 @@ const RoomsPage = (props) => {
                         <th>Price</th>
                         <th>Room type</th>
                         <th>Available</th>
+                        <th>Guest Id</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
