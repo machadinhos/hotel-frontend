@@ -13,7 +13,7 @@ const RoomsPage = (props) => {
     useEffect(() => {
         axios.get('http://localhost:8080/hotel/api/rooms')
                 .then(response => {
-                    setRooms(response.data);
+                    setRooms(response.data.data);
                     setLoading(false);
                 })
             .catch(() => {

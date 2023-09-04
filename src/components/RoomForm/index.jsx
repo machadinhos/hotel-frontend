@@ -16,7 +16,7 @@ const RoomForm = (props) => {
 
     useEffect(() => {
         axios.get('http://localhost:8080/hotel/api/guests')
-                .then(response => setGuests(response.data));
+                .then(response => setGuests(response.data.data));
     }, []);
 
     const renderGuestsSelect = () => {

@@ -13,7 +13,7 @@ const GuestsPage = (props) => {
     useEffect(() => {
         axios.get('http://localhost:8080/hotel/api/guests')
                 .then(response => {
-                    setGuests(response.data);
+                    setGuests(response.data.data);
                     setLoading(false);
                 })
             .catch(() => {
@@ -59,6 +59,8 @@ const GuestsPage = (props) => {
                             <td>{guest.lastName}</td>
                             <td>{guest.email}</td>
                             <td>{guest.phoneNumber}</td>
+                    <td>{guest.checkedIn + ''}</td>
+                    <td>{guest.roomId ? guest.roomId : 'null'}</td>
                     <td>
                         <button onClick={handleEditGuestClick(guest)} type="button" className="btn btn-success">Edit
                         </button>
@@ -85,6 +87,8 @@ const GuestsPage = (props) => {
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th>Checked-In</th>
+                        <th>Room</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
