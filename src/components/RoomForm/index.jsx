@@ -15,7 +15,7 @@ const RoomForm = (props) => {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:8080/hotel/api/guests')
+        axios.get('http://localhost:8080/hotel/api/guest/not-checked-in')
                 .then(response => setGuests(response.data.data));
     }, []);
 
@@ -38,9 +38,16 @@ const RoomForm = (props) => {
         const roomNumber = button.form[1].value;
         const price = button.form[2].value;
         const roomType = button.form[3].value;
+        const available = button.form[4].checked;
+        let guestId;
+        if (available) {
+            guestId = null;
+        } else {
+            guestId = button.form[6].value;
+        }
 
         const room = {
-            id: id, roomNumber: roomNumber, price: price, roomType: roomType, available: isAvailable
+            id: id, roomNumber: roomNumber, price: price, roomType: roomType, available: available, guestId: guestId
         };
 
         props.setRoom(room);
