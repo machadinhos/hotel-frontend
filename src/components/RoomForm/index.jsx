@@ -16,7 +16,18 @@ const RoomForm = (props) => {
 
     useEffect(() => {
         axios.get('http://localhost:8080/hotel/api/guest/not-checked-in')
-                .then(response => setGuests(response.data.data));
+                .then(response => setGuests(response.data.data))
+                .then(() => {
+                    if (room.guestId) {
+                        const roomGuest = axios.get('http://localhost:8080/hotel/api/guest/' + room.guestId)
+                                .then(response => response.data.data)
+                                .then(guest => {
+                                    setGuests([...guests, guest]);
+                                });
+                    }
+                });
+        setAvailable(room.available);
+        renderGuestsSelect();
     }, []);
 
     const renderGuestsSelect = () => {
@@ -89,7 +100,7 @@ const RoomForm = (props) => {
                 </div>
                 <div className="form-check">
                     <input onClick={() => setAvailable(false)} className="form-check-input" type="radio"
-                           name="available" id="false" defaultChecked={!room.available}/>
+                           name="available" id="false" defaultChecked={!room.available} disabled={!guests.length > 0}/>
                     <div id="guestsSelectDiv">
                         <label className="form-check-label" htmlFor="false">
                             false
