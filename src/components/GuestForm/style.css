@@ -1,4 +1,8 @@
-#submitButton {
-    margin-top: 20px;
-    margin-bottom: 20px;
+#roomsSelectDiv {
+    display: flex;
+}
+
+#roomSelect {
+    position: fixed;
+    margin-left: 60px;
 }

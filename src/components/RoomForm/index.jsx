@@ -10,10 +10,6 @@ const RoomForm = (props) => {
 
     const room = props.room;
 
-    if (room.available === undefined) {
-        room.available = true;
-    }
-
     useEffect(() => {
         axios.get('http://localhost:8080/hotel/api/guest/not-checked-in')
                 .then(response => setGuests(response.data.data))
@@ -62,6 +58,8 @@ const RoomForm = (props) => {
         };
 
         props.setRoom(room);
+
+        console.log(room);
 
         axios[props.roomHttpRequestType](props.roomUrl, room)
                 .then(() => navigate('/rooms'))
