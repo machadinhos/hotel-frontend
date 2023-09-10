@@ -15,7 +15,7 @@ const RoomForm = (props) => {
                 .then(response => response.data.data)
                 .then(guests => {
                     if (room.guestId) {
-                        const roomGuest = axios.get('http://localhost:8080/hotel/api/guest/' + room.guestId)
+                        axios.get('http://localhost:8080/hotel/api/guest/' + room.guestId)
                                 .then(response => response.data.data)
                                 .then(guest => {
                                     setGuests([...guests, guest]);
