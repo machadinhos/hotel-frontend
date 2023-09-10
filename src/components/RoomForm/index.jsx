@@ -23,9 +23,11 @@ const RoomForm = (props) => {
                     } else {
                         setGuests(guests);
                     }
+                })
+                .then(() => {
+                    setAvailable(room.available);
+                    renderGuestsSelect();
                 });
-        setAvailable(room.available);
-        renderGuestsSelect();
     }, []);
 
     const renderGuestsSelect = () => {

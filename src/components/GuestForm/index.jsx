@@ -24,9 +24,11 @@ const GuestForm = (props) => {
                     } else {
                         setRooms(rooms);
                     }
+                })
+                .then(() => {
+                    setCheckedIn(guest.checkedIn);
+                    renderRoomsSelect();
                 });
-        setCheckedIn(guest.checkedIn);
-        renderRoomsSelect();
     }, []);
 
     const renderRoomsSelect = () => {
