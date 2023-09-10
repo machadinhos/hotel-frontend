@@ -13,14 +13,16 @@ const GuestForm = (props) => {
 
     useEffect(() => {
         axios.get('http://localhost:8080/hotel/api/room/available')
-                .then(response => setRooms(response.data.data))
-                .then(() => {
+                .then(response => response.data.data)
+                .then(rooms => {
                     if (guest.roomId) {
                         const roomGuest = axios.get('http://localhost:8080/hotel/api/room/' + guest.roomId)
                                 .then(response => response.data.data)
                                 .then(room => {
                                     setRooms([...rooms, room]);
                                 });
+                    } else {
+                        setRooms(rooms);
                     }
                 });
         setCheckedIn(guest.checkedIn);

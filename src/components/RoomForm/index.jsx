@@ -12,14 +12,16 @@ const RoomForm = (props) => {
 
     useEffect(() => {
         axios.get('http://localhost:8080/hotel/api/guest/not-checked-in')
-                .then(response => setGuests(response.data.data))
-                .then(() => {
+                .then(response => response.data.data)
+                .then(guests => {
                     if (room.guestId) {
                         const roomGuest = axios.get('http://localhost:8080/hotel/api/guest/' + room.guestId)
                                 .then(response => response.data.data)
                                 .then(guest => {
                                     setGuests([...guests, guest]);
                                 });
+                    } else {
+                        setGuests(guests);
                     }
                 });
         setAvailable(room.available);
