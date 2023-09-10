@@ -12,23 +12,25 @@ const GuestForm = (props) => {
     const guest = props.guest;
 
     useEffect(() => {
-        axios.get('http://localhost:8080/hotel/api/room/available')
-                .then(response => response.data.data)
-                .then(rooms => {
-                    if (guest.roomId) {
-                        axios.get('http://localhost:8080/hotel/api/room/' + guest.roomId)
-                                .then(response => response.data.data)
-                                .then(room => {
-                                    setRooms([...rooms, room]);
-                                });
-                    } else {
-                        setRooms(rooms);
-                    }
-                })
-                .then(() => {
-                    setCheckedIn(guest.checkedIn);
-                    renderRoomsSelect();
-                });
+        (async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/hotel/api/room/available');
+                const availableRooms = response.data.data;
+
+                if (guest.roomId) {
+                    const roomResponse = await axios.get(`http://localhost:8080/hotel/api/room/${guest.roomId}`);
+                    const room = roomResponse.data.data;
+                    setRooms([...availableRooms, room]);
+                } else {
+                    setRooms(availableRooms);
+                }
+
+                setCheckedIn(guest.checkedIn);
+                renderRoomsSelect();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        })();
     }, []);
 
     const renderRoomsSelect = () => {
